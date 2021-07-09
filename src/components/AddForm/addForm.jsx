@@ -4,24 +4,36 @@ import {useState} from 'react';
 
 function AddForm({addItem}) {
 
-    const [newItem, setNewItem] = useState({
-        name: '',
-        quantity: 0,
-        unit: ''
-    });
+    const [newItemName, setNewItemName] = useState('');
+    const [newItemQuantity, setNewItemQuantity] = useState('');
+    const [newItemUnit, setNewItemUnit] = useState('');
 // need some logic here
 
-    addItem(newItem);
+    let newItemFinished = {
+        name: newItemName,
+        quantity: newItemQuantity,
+        unit: newItemUnit
+    }
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        console.log(newItemFinished);
+        addItem(newItemFinished);
+        setNewItemName('');
+        setNewItemQuantity('');
+        setNewItemUnit('');
+    }
 
     return (
-        <main>
+        <>
             <p>Under Construction...</p>
-            <form onSubmit={addItem} />
-            <input value={newItem.name} onChange={(evt) => setNewItem(evt.target.value)} />
-            <input value={newItem.quantity} onChange={(evt) => setNewItem(evt.target.value)} />
-            <input value={newItem.unit} onChange={(evt) => setNewItem(evt.target.value)} />
-            <button type='submit'>Add Item</button>
-        </main>
+            <form onSubmit={handleSubmit}>
+            <input value={newItemName} onChange={(evt) => setNewItemName(evt.target.value)} />
+            <input value={newItemQuantity} onChange={(evt) => setNewItemQuantity(evt.target.value)} />
+            <input value={newItemUnit} onChange={(evt) => setNewItemUnit(evt.target.value)} />
+            <input type='submit' value="Add Item" />
+            </form>
+        </>
     )
 }
 

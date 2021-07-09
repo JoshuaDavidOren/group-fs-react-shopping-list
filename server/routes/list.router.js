@@ -4,10 +4,6 @@ const router = express.Router();
 const pool = require('../modules/pool.js');
 
 // TODO - Add routes here...
-<<<<<<< HEAD
-
-router.put('/item/:id', (req,res) => {
-=======
 router.get('/', (req, res) => {
     const queryText = `SELECT * FROM list`;
     pool.query(queryText)
@@ -19,11 +15,10 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         });
 });
-router.put('/', (req, res) => {
->>>>>>> d454250a2b82712dbeb0fc517381a9b2fda6e0e2
+router.put('/:id', (req, res) => {
     const itemId = req.params.id;
-    const itemStatus = req.body.isBought;
-    const queryText = `UPDATE list SET "isBought"= !$1 WHERE id =$2;`;
+    const itemStatus = !req.body.isBought;
+    const queryText = `UPDATE list SET "isBought"= $1 WHERE id =$2;`;
     pool.query(queryText, [itemStatus, itemId])
     .then(response => {
         console.log('Response inside router.put', response);
@@ -32,26 +27,19 @@ router.put('/', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-router.post('/', (reqs, res) => {
-=======
 
 router.post('/', (req, res) => {
->>>>>>> d454250a2b82712dbeb0fc517381a9b2fda6e0e2
     let newItem = req.body;
-    console.log(`Attmepting to post ${newItem}`);
-    let qText = `INSERT INTO "list" ("name", "quantity", "unit", "isBought") VALUES ($1, $2, $3, $4);`;
+    console.log(`Attempting to post ${newItem}`);
+    let qText = `INSERT INTO list (name, quantity, unit, "isBought") VALUES ($1, $2, $3, $4);`;
     pool.query(qText, [newItem.name, newItem.quantity, newItem.unit, false])
-    .then(res => {
+    .then(response => {
+        console.log('success POSTING to DB', response);
         res.sendStatus(200);
     })
     .catch(error => {
         console.log(error);
         res.sendStatus(500);
-<<<<<<< HEAD
-    })
-})
-=======
     });
 });
 
@@ -89,6 +77,5 @@ router.delete("/:id", (req, res) => {
 });
 
 
->>>>>>> d454250a2b82712dbeb0fc517381a9b2fda6e0e2
 
 module.exports = router;

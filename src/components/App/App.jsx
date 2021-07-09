@@ -1,11 +1,18 @@
 import React from 'react';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
-import ShoppingList from '/shoppingList' 
-import Header from '../Header/Header.jsx'
+import Header from '../Header/Header.jsx';
 import './App.css';
+import AddForm from '../AddForm/AddForm';
+import ShoppingList from '../ShoppingList/ShoppingList';
 
 function App() {
-<<<<<<< HEAD
+
+    let [shoppingList, setShoppingList] = useState([]);
+
+    useEffect(() => {
+        getGroceryList();
+    }, []);
 
     const updateItem = () => {
             axios.put(`/item/${itemId}`, {isBought: itemStatus.isBought})
@@ -16,8 +23,6 @@ function App() {
             console.log('Axios PUT unsuccessful update', error);
         });
     }
-=======
-    let [shoppingList, setShoppingList] = useState([]); 
 
     const getGroceryList = () => {
         axios({
@@ -25,15 +30,16 @@ function App() {
             url: '/list'
         })
         .then(response => {
-            console.log('SUCCESS GETting from DB', response.data)
-            // APPEND GROCERY LIST FUNCTION HERE(response.data);
+            console.log('SUCCESS GETting from DB', response.data);
+            setShoppingList(response.data);
         })
         .catch(error => {
             console.log('ERROR GETting from DB', error);
         })
     };
-    const addItem = () => {
-        axios.post('/item', {name: newItem.name, quantity: newItem.quantity, unit: newItem.unit, isBought: false})
+    const addItem = (newItem) => {
+        console.log(newItem);
+        axios.post('/list', (newItem))
         .then (res => {
             // clear inputs
             getGroceryList();
@@ -61,14 +67,14 @@ function App() {
         })
     };
 
->>>>>>> d454250a2b82712dbeb0fc517381a9b2fda6e0e2
 
 
     return (
         <div className="App">
             <Header />
             <main>
-                <ShoppingList list={shoppingList} />
+            <AddForm addItem={addItem} />
+            <ShoppingList shoppingList={shoppingList} />
             </main>
         </div>
     );
