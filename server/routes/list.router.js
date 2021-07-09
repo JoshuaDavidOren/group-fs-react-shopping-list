@@ -5,7 +5,6 @@ const pool = require('../modules/pool.js');
 
 // TODO - Add routes here...
 
-<<<<<<< HEAD
 router.put('/', (req,res) => {
     const itemId = req.params.id;
     const queryText = `UPDATE list SET "isBought"= !isBought WHERE id =$1;`;
@@ -15,14 +14,13 @@ router.put('/', (req,res) => {
     }).catch(error => {
         console.log('error inside router.put', error);
     });
-})
+});
 
 
-=======
-router.post('/', (reqs, res) => {
+router.post('/', (req, res) => {
     let newItem = req.body;
     console.log(`Attmepting to post ${newItem}`);
-    let qText = `INSERT INTO "fs-react-shopping" ("name", "quantity", "unit", "isBought") VALUES ($1, $2, $3, $4);`;
+    let qText = `INSERT INTO "list" ("name", "quantity", "unit", "isBought") VALUES ($1, $2, $3, $4);`;
     pool.query(qText, [newItem.name, newItem.quantity, newItem.unit, false])
     .then(res => {
         res.sendStatus(200);
@@ -30,19 +28,14 @@ router.post('/', (reqs, res) => {
     .catch(error => {
         console.log(error);
         res.sendStatus(500);
-<<<<<<< HEAD
     });
 });
-=======
-    })
-})
->>>>>>> db282e57d78274b0e0d210476be4599064479c1d
->>>>>>> b4baa1e8071ac280b185f62fabdb6646409be5a3
+
 
 router.delete('/', (req, res) => {
 
     console.log(req.params);
-    qText = `DELETE * FROM "list";`
+    let qText = `DELETE * FROM "list";`;
 
     pool.query(qText)
         .then(dbResponse => {
