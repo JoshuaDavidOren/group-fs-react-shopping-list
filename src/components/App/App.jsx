@@ -5,6 +5,18 @@ import './App.css';
 
 
 function App() {
+
+    const updateItem = () => {
+            axios.put(`/item/${itemId}`, {isBought: itemStatus.isBought})
+        .then(dbResponse => {
+            console.log('Axios Put successful update', dbResponse);
+        })
+        .catch(error => {
+            console.log('Axios PUT unsuccessful update', error);
+        });
+    }
+
+
     return (
         <div className="App">
             <Header />
