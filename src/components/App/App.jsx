@@ -3,27 +3,6 @@ import React from 'react';
 import Header from '../Header/Header.jsx'
 import './App.css';
 
-const deleteItem = () => {
-    axios.delete('/item', {item: id})
-    .then(response => {
-        //call GET function
-    })
-    .catch(err => {
-        console.log('error deleting item app.jsx', err);
-    })
-}
-
-const deleteList = () => {
-    axios.delete('/')
-    .then(response => {
-        //call GET function
-    })
-    .catch(err => {
-        console.log('error deleting list app.jsx', err);
-    })
-}
-
-
 function App() {
 
     const getGroceryList = () => {
@@ -38,8 +17,35 @@ function App() {
         .catch(error => {
             console.log('ERROR GETting from DB', error);
         })
-    }
-
+    };
+    const addItem = () => {
+        axios.post('/item', {name: newItem.name, quantity: newItem.quantity, unit: newItem.unit, isBought: false})
+        .then (res => {
+            // clear inputs
+            getGroceryList();
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    };
+    const deleteList = () => {
+        axios.delete('/')
+        .then(response => {
+            getGroceryList();
+        })
+        .catch(err => {
+            console.log('error deleting list app.jsx', err);
+        })
+    };
+    const deleteItem = () => {
+        axios.delete('/item', {item: id})
+        .then(response => {
+            getGroceryList();
+        })
+        .catch(err => {
+            console.log('error deleting item app.jsx', err);
+        })
+    };
     return (
         <div className="App">
             <Header />
@@ -48,6 +54,6 @@ function App() {
             </main>
         </div>
     );
-}
+};
 
 export default App;
