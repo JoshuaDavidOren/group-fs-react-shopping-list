@@ -27,7 +27,7 @@ router.put('/', (req, res) => {
 })
 
 
-router.post('/', (reqs, res) => {
+router.post('/', (req, res) => {
     let newItem = req.body;
     console.log(`Attmepting to post ${newItem}`);
     let qText = `INSERT INTO "fs-react-shopping" ("name", quantity, "units", "isBought") VALUES ($1, $2, $3, $4);`;
