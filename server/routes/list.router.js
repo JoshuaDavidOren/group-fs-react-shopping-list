@@ -7,7 +7,7 @@ const pool = require('../modules/pool.js');
 
 router.put('/', (req,res) => {
     const itemId = req.params.id;
-    const queryText = `UPDATE table SET "isBought"= !isBought WHERE id =$1;`;
+    const queryText = `UPDATE list SET "isBought"= !isBought WHERE id =$1;`;
     pool.query(queryText, [itemId])
     .then(response => {
         console.log('Response inside router.put'. response);
