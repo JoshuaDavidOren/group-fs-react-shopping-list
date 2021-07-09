@@ -1,9 +1,11 @@
 import React from 'react';
-
+import { useState, useEffect } from 'react';
+import ShoppingList from '/shoppingList' 
 import Header from '../Header/Header.jsx'
 import './App.css';
 
 function App() {
+    let [shoppingList, setShoppingList] = useState([]); 
 
     const getGroceryList = () => {
         axios({
@@ -46,11 +48,14 @@ function App() {
             console.log('error deleting item app.jsx', err);
         })
     };
+
+
+
     return (
         <div className="App">
             <Header />
             <main>
-                <p>Under Construction...</p>
+                <ShoppingList list={shoppingList} />
             </main>
         </div>
     );
