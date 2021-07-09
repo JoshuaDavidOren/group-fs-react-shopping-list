@@ -37,4 +37,4 @@ function AddForm({addItem}) {
     )
 }
 
-export default AddForm;
+export default AddForm
