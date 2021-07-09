@@ -5,6 +5,18 @@ import Header from '../Header/Header.jsx'
 import './App.css';
 
 function App() {
+<<<<<<< HEAD
+
+    const updateItem = () => {
+            axios.put(`/item/${itemId}`, {isBought: itemStatus.isBought})
+        .then(dbResponse => {
+            console.log('Axios Put successful update', dbResponse);
+        })
+        .catch(error => {
+            console.log('Axios PUT unsuccessful update', error);
+        });
+    }
+=======
     let [shoppingList, setShoppingList] = useState([]); 
 
     const getGroceryList = () => {
@@ -49,6 +61,7 @@ function App() {
         })
     };
 
+>>>>>>> d454250a2b82712dbeb0fc517381a9b2fda6e0e2
 
 
     return (
