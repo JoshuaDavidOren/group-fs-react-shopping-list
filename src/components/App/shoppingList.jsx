@@ -1,4 +1,6 @@
-function renderList ({shoppingList}) {
+
+
+function RenderList ({shoppingList}) {
     return (
 console.log(shoppingList.map())
 
@@ -9,4 +11,4 @@ console.log(shoppingList.map())
 
 
 
-export default ShoppingList;
+export default RenderList;

@@ -1,11 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import ShoppingList from '/shoppingList' 
+import axios from 'axios';
+import RenderList from "/shoppingList"; 
 import Header from '../Header/Header.jsx'
 import './App.css';
 
 function App() {
-    let [shoppingList, setShoppingList] = useState([]); 
+    let [shoppingList, setShoppingList] = useState([]);
+    
+    useEffect(() => {
+      getGroceryList();
+    }, []);
 
     const getGroceryList = () => {
         axios({
@@ -15,6 +20,7 @@ function App() {
         .then(response => {
             console.log('SUCCESS GETting from DB', response.data)
             // APPEND GROCERY LIST FUNCTION HERE(response.data);
+            setShoppingList(response.data);
         })
         .catch(error => {
             console.log('ERROR GETting from DB', error);
@@ -52,12 +58,12 @@ function App() {
 
 
     return (
-        <div className="App">
-            <Header />
-            <main>
-                <ShoppingList list={shoppingList} />
-            </main>
-        </div>
+      <div className="App">
+        <Header />
+        <main>
+          <RenderList list={shoppingList} />
+        </main>
+      </div>
     );
 };
 
